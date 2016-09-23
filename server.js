@@ -5,7 +5,8 @@ methodOverride = require('method-override'),
 stormpathClient = require('stormpath');
 
 var app = express();
-
+// Inicialización de base de datos
+//Inicialización de Express
 app.get('/',function(req,res){
     res.send('Hello, Welcome to Express');
 
@@ -13,4 +14,4 @@ app.get('/',function(req,res){
 
 app.listen(8080,function(){
     console.log('sensHealth listening on port 8080');
-})
+});
