@@ -29,7 +29,8 @@ exports.addAdmin = function(req,res){
         curp: req.body.curp,
         nombre: req.body.nombre,
         apellidos: req.body.apellidos,
-        edad: req.body.edad
+        edad: req.body.edad,
+        rol: req.body.rol
     });
 
     admin.save(function(error){
@@ -45,6 +46,7 @@ exports.updateAdmin = function(req,res){
         admin.nombre = req.params.nombre;
         admin.apellidos = req.params.apellidos;
         admin.edad = req.params.edad;
+        admin.rol = req.params.rol;
 
         admin.save(function(error){
             if(error) return res.send(500,error.message);

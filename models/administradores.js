@@ -5,7 +5,8 @@ exports = module.exports = function(server,mongoose){
         curp: {type:String},
         nombre:{type:String},
         apellidos:{type:String},
-        edad:{type:Number}
+        edad:{type:Number},
+        rol: {type:Number}
     });
 }
 
