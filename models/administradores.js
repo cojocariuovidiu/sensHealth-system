@@ -8,6 +8,5 @@ exports = module.exports = function(server,mongoose){
         edad:{type:Number},
         rol: {type:Number}
     });
-}
-
 mongoose.model('Administrador',adminSchema);
+}
