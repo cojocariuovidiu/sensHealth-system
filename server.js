@@ -6,6 +6,8 @@ stormpathClient = require('stormpath');
 
 //Inicialización de Express
 var app = express();
+var router = express.Router();
+
 app.get('/',function(req,res){
     res.send('Hello, Welcome to Express');
 
@@ -45,6 +47,7 @@ var secretariaController = require('./controllers/secretariaCtlr');
 
 //Ruta para obetener todas las posiciones
 
+
 router.route('/posiciones')
 .get(positionController.findAllPositions)
 .post(positionController.addPosition);
@@ -65,7 +68,7 @@ router.route('/posiciones/:id')
     .get(administradorController.findAdminsById)
     .put(administradorController.updateAdmin)
     .delete(administradorController.deleteAdmin);
-        
+      
         //Ruta para  obtener todos los doctores
         router.route('/doctores')
         .get(doctoresController.findAllDoctors)
@@ -131,6 +134,8 @@ router.route('/posiciones/:id')
                             .get(secretariaController.findSecretariaById)
                             .put(secretariaController.updateSecretaria)
                             .delete(secretariaController.deleteSecretaria);
-                            
+
 app.use(router);
+
+
 
