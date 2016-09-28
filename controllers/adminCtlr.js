@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Administrador = mongoose.model('Administrador');
 
 //GET Retorna todos los administradores
-exports.finAllAdmins = function(req,res){
+exports.findAllAdmins = function(req,res){
     Administrador.find(function(error,admins){
         if(error) return res.send(500,error.message);
         console.log('GET /admins/');
