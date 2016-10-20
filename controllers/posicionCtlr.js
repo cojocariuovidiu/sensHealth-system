@@ -38,18 +38,17 @@ exports.addPosition = function(req,res){
     }
 
     var fechaservidor =(hoy = mm+'/'+dd+'/'+yyyy+" "+hh+":"+min+":"+sec);
-    console.log(fechaservidor);
-    console.log('POST');
     
+    console.log('POST');
     var position = new Posicion({
         cliente: req.body.cliente,
         frecuencia: req.body.frecuencia,
         posicion: {
-            lat:req.body.lat,
-            lon:req.body.lon
+            lat:req.body.posicion.lat,
+            lon:req.body.posicion.lon
         },
         fechalocal: req.body.fechalocal,
-        fechaservidor: req.body.fechaservidor
+        fechaservidor: fechaservidor
     });
     position.save(function(error){
         if(error) return res.send(500,error.message);
