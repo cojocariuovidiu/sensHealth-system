@@ -8,6 +8,13 @@ stormpathClient = require('stormpath');
 var app = express();
 var router = express.Router();
 
+app.use(function(req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", 'http://localhost');
+  res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS,PUT,DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Accept');
+
+  next();
+});
 app.get('/',function(req,res){
     res.send('Hello, Welcome to Express');
 
@@ -46,7 +53,6 @@ var operadorController = require('./controllers/operadorCtlr');
 var secretariaController = require('./controllers/secretariaCtlr');
 
 //Ruta para obetener todas las posiciones
-
 
 router.route('/posiciones')
 .get(positionController.findAllPositions)
@@ -136,6 +142,4 @@ router.route('/posiciones/:id')
                             .delete(secretariaController.deleteSecretaria);
 
 app.use(router);
-
-
 
