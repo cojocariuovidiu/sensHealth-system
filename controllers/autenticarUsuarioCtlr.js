@@ -1,6 +1,10 @@
 exports.authenticateUser = function(req,res){
+    console.log('Entre')
+
+    var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 
 var stormpath = require('stormpath');
+    var xhr = new XMLHttpRequest();
 
 var apiKey = new stormpath.ApiKey(
 process.env['STORMPATH_CLIENT_APIKEY_ID'],
@@ -28,9 +32,19 @@ application.authenticateAccount(authRequest,function(err,result){
     else{
 
     result.getAccount(function(err,account){
-        res.status(200).send(account.email);
-        console.log('Authentication successful for: ',account.email);
-        req.session.user = account.email;
+        res.status(200).send(account.givenName);
+        console.log('Authentication successful for: ',account.givenName);
+        //var nombre = {account.email};
+
+
+        console.log('session: ',account.email);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:8080/sesiones");
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+        xhr.send(JSON.stringify({sesion:account.username}));
+
 
     });
     }
