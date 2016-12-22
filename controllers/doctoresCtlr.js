@@ -10,7 +10,7 @@ exports.findAllDoctors = function(req,res){
     });
 }
 
-//GET por ID de pacientes
+//GET por ID de usuarios
 exports.findDoctorsById = function(req,res){
     Paciente.find(req.params.id,function(error, doctor){
         if(error) return res.send(500,error.message);
@@ -66,4 +66,3 @@ exports.addDoctor = function(req,res){
             });
         });
     }
-    
