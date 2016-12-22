@@ -1,7 +1,9 @@
 exports.addAccount = function(req,res){
 var stormpath = require('stormpath');
+var XMLHttpRequest = require("xmlhttprequest");
 
 
+console.log('Entree')
 var apiKey = new stormpath.ApiKey(
 process.env['STORMPATH_CLIENT_APIKEY_ID'],
 process.env['STORMPATH_CLIENT_APIKEY_SECRET']
@@ -37,22 +39,40 @@ client.getApplication(applicationHref,function(error,application){
                                       domicilio: domicilio, historial: historial, rol: rol}
 
 
-        /*var xmlhttp2 = new XMLHttpRequest();
-        xmlhttp2.open("POST", "http://192.168.1.88:8080/pacientes");
-        xmlhttp2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        /*var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://192.168.23.125:8080/usuarios");
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
-        xmlhttp2.send(JSON.stringify(datos));
-        xmlhttp2.close();*/
+        xhr.send(JSON.stringify(datos));
+        xhr.close();*/
+
+        var hoy = new Date();
+    var dd = hoy.getDate();
+    var mm = hoy.getMonth()+1;
+    var yyyy = hoy.getFullYear();
+    var hh = hoy.getHours();
+    var min = hoy.getMinutes();
+    var sec = hoy.getSeconds();
+
+    if(dd<=10){
+        dd='0'+dd
+    }
+
+    if(mm<=10){
+        mm='0'+mm
+    }
+
+    var fechaservidor =(hoy = mm+'/'+dd+'/'+yyyy+" "+hh+":"+min+":"+sec);
 
     console.log('Datos enviados a mongo: ',datos);
-
+    console.log('Fecha: ',fechaservidor)
     console.log('Cuenta armada: ',account);
 
     application.createAccount(account,function(err,createdAccount){
 
         if(err){
             console.log('Hay un error: ',err.userMessage);
-            res.status(200).send('Error: ' + err.userMessage);
+            res.status(res.statusCode).send('Error: ' + err.userMessage);
         }else{
         res.status(200).send(createdAccount);
         console.log('Cuenta creada: ',createdAccount);
